@@ -9,13 +9,15 @@ import org.slf4j.LoggerFactory;
 import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
 import next.dao.AnswerDao;
+import next.dao.QuestionDao;
 import next.model.Answer;
 
 public class AddAnswerController extends AbstractController {
 	private static final Logger log = LoggerFactory.getLogger(AddAnswerController.class);
 
-	private AnswerDao answerDao = new AnswerDao();
-
+	private QuestionDao questionDao = QuestionDao.getInstance();
+	private AnswerDao answerDao = AnswerDao.getInstance();
+	
 	@Override
 	public ModelAndView execute(HttpServletRequest req, HttpServletResponse response) throws Exception {
 		Answer answer = new Answer(req.getParameter("writer"), 

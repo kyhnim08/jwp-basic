@@ -7,14 +7,14 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
+import next.model.Question;
 import core.jdbc.JdbcTemplate;
 import core.jdbc.KeyHolder;
 import core.jdbc.PreparedStatementCreator;
 import core.jdbc.RowMapper;
-import next.model.Question;
+
 
 public class QuestionDao {
-	
 	private static QuestionDao questionDao;
 	private JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
 	
@@ -27,8 +27,7 @@ public class QuestionDao {
 		return questionDao;
 	}
 	
-	public List<Question> findAll() {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+	public List<Question> findAll() {		
 		String sql = "SELECT questionId, writer, title, createdDate, countOfAnswer FROM QUESTIONS "
 				+ "order by questionId desc";
 		
@@ -48,7 +47,6 @@ public class QuestionDao {
 	
 	
 	public Question insert(Question question) {
-        JdbcTemplate jdbcTemplate = new JdbcTemplate();
         String sql = "INSERT INTO QUESTIONS (writer, contents,title, createdDate) VALUES (?, ?, ?, ?)";
         PreparedStatementCreator psc = new PreparedStatementCreator() {
 			@Override
@@ -68,7 +66,6 @@ public class QuestionDao {
     }
 
 	public Question findById(long questionId) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "SELECT questionId, writer, title, contents, createdDate, countOfAnswer FROM QUESTIONS "
 				+ "WHERE questionId = ?";
 		
